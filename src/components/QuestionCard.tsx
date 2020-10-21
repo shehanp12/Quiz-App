@@ -9,13 +9,19 @@ type Props = {
     totalQuestions:number;
 }
 
-const QuestionCard : React.FC<Props>= ({question,
+const QuestionCard : React.FC<Props>= ({
+                                           question,
                                            answer,
                                            callback,
                                            userAnswer,
                                            questionNr,
                                            totalQuestions}) => (
-                <div>Question Card</div>
+              <div>
+                  <p className="number">
+
+                  </p>
+                  <p dangerouslySetInnerHTML={{__html:question}}/>
+              </div>
 );
 
 export  default  QuestionCard;
