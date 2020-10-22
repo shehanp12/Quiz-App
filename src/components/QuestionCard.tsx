@@ -1,10 +1,11 @@
-import React  from "react"
+import React  from "react";
+import { AnswerObject } from '../App';
 
 type Props = {
     question:string;
     answers: string[];
     callback:any;
-    userAnswer:any;
+    userAnswer:AnswerObject | undefined;
     questionNr:number;
     totalQuestions:number;
 }
@@ -20,16 +21,16 @@ const QuestionCard : React.FC<Props>= ({
                   <p className="number">
                       Question:{questionNr}/{totalQuestions}
                   </p>
+                  {console.log(question)}
                   <p dangerouslySetInnerHTML={{__html:question}}/>
+
                   <div>
-                      {answers.map(answer =>(
-                          <div>
-                              <button disabled={userAnswer} onClick={callback}>
-                                  <span dangerouslySetInnerHTML={{__html: answer}}/>
-                              </button>
-                          </div>
+                      {answers.map((answer) => (
+                          <button disabled={userAnswer ? true : false} value={answer} onClick={callback}>
+                              <span dangerouslySetInnerHTML={{ __html: answer }} />
+                          </button>
                       ))}
-                  </div>
+              </div>
               </div>
 );
 
