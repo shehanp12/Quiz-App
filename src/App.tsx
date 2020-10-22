@@ -80,7 +80,7 @@ const App :React.FC = () => {
                   </button>
               ) : null}
               {!gameOver ? <p className='score'>Score: {score}</p> : null}
-              {loading ? <p>Loading Questions...</p> : null}
+              {loading ? <p className='loading'>Loading Questions...</p> : null}
               {!loading && !gameOver && (
                   <QuestionCard
                       questionNr={number + 1}

@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import BGImage from './images/nattu-adnan-unsplash.jpg';
+import BGImage from './images/background.jpg';
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
   }
 
   .score {
-    color: #fff;
+    color: black;
     font-size: 2rem;
     margin: 0;
   }
@@ -65,5 +65,9 @@ export const Wrapper = styled.div`
 
   .start {
     max-width: 200px;
+  }
+  
+  .loading{
+  color:black;
   }
 `;
