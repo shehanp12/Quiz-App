@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import {Difficulty, fetchQuizQuestions, QuestionState} from './utils/API';
+import QuestionCard from './components/QuestionCard';
 
-type AnswerObject = {
+export type AnswerObject = {
     question:string;
     answer:string;
     correct:boolean;
     correctAnswer:string;
 }
 
+const TOTAL_QUESTIONS = 10;
 
-const App =() => {
-    const TOTAL_QUESTIONS = 10;
+const App :React.FC = () => {
+
     const [loading,setLoading] = useState(false);
     const [questions,setQuestions] = useState<QuestionState[]>([]);
     const [number,setNumber] = useState(0);
@@ -42,7 +44,6 @@ const App =() => {
     }
 
 
-
   return (
     <div className="App">
      <h1>React Quiz</h1>
@@ -53,16 +54,20 @@ const App =() => {
             </button>
         ):null
         }
+        {!gameOver ? <p className='score'>Score {score} </p> :null }
+        {loading ? <p> Loading questions..</p>:null}
+        {!loading && !gameOver && (
 
-        <p className="score">Score: </p>
-        <p>Loading Questions..</p>
-        {/*<QuestionCard*/}
-        {/*    questionNr={number +1}*/}
-        {/*    totalQuestions={TOTAL_QUESTIONS}*/}
-        {/*    question={questions[number].question}*/}
-        {/*    answers={questions[number].answers}*/}
-        {/*    userAnswer={userAnswers ? userAnswers[number]:undefined}*/}
-        {/*    callback={checkAnswer}/>*/}
+            <QuestionCard
+            questionNr={number +1}
+            totalQuestions={TOTAL_QUESTIONS}
+             question={questions[number].question}
+            answers={questions[number].answers}
+            userAnswer={userAnswers ? userAnswers[number]:undefined}
+            callback={checkAnswer}/>
+
+        )}
+
 
 
         <button className="next" onClick={nextQuestion}>
@@ -72,6 +77,6 @@ const App =() => {
 
     </div>
   );
-}
+};
 
 export default App;
