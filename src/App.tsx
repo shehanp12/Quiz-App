@@ -37,9 +37,34 @@ const App :React.FC = () => {
 
     const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) =>{
 
+        if(!gameOver){
+            // Users answers
+            const answer = e.currentTarget.value;
+            // Check answer again correct answer
+            const correct = questions[number].correct_answer ===  answer;
+            // add score if answer is correct
+            if (correct) setScore((prev) => prev +1)
+            //save answer in the array for user answer
+            const  answerObject = {
+                question:questions[number].question,
+                answer,
+                correct,
+                correctAnswer: questions[number].correct_answer
+            };
+            setUserAnswers((prev) =>[...prev,answerObject]);
+
+        }
+
     }
 
     const  nextQuestion = () => {
+        // Move on to next question
+        const nextQuestion = number +1;
+        if(nextQuestion ===TOTAL_QUESTIONS){
+            setGameOver(true)
+        }else{
+            setNumber(nextQuestion);
+        }
 
     }
 
@@ -68,12 +93,15 @@ const App :React.FC = () => {
 
         )}
 
-
-
-        <button className="next" onClick={nextQuestion}>
-            Next Question
-        </button>
-
+        {!gameOver &&
+        !loading &&
+            userAnswers.length === number +1 &&
+            number !== TOTAL_QUESTIONS -1 ? (
+                <button className='next' onClick={nextQuestion}>
+                    Next Question
+                </button>
+        ): null
+        }
 
     </div>
   );
